@@ -1,41 +1,25 @@
 # 📚 API Listagem de Nomes
 
-<<<<<<< HEAD
-API REST desenvolvida para realizar o cadastro, consulta, atualização e remoção de nomes.
-
-Projeto desenvolvido com foco em estudos de **Node.js, Express e TypeScript**, aplicando organização em camadas.
-=======
 API REST desenvolvida para realizar o gerenciamento de nomes, permitindo cadastrar, listar, atualizar e remover registros.
 
-Este projeto foi desenvolvido com o objetivo de praticar criação de APIs utilizando **Node.js, Express e TypeScript e MySQL(Fase de Implementação)**, aplicando organização em camadas e boas práticas de desenvolvimento.
->>>>>>> 4497d7db18376dd23b19aa0f0fe444d105505532
+Projeto desenvolvido com foco em estudos de **Node.js, Express, TypeScript e MySQL**, aplicando organização em camadas e boas práticas de desenvolvimento.
 
 ---
 
 ## 🚀 Tecnologias utilizadas
 
-<<<<<<< HEAD
 - Node.js
 - Express
 - TypeScript
 - MySQL
+- mysql2
 - Git e GitHub
-=======
-* Node.js
-* Express
-* TypeScript
-* MySQL
-* mysql2
-* Git e GitHub
->>>>>>> 4497d7db18376dd23b19aa0f0fe444d105505532
 
 ---
 
 ## 📂 Estrutura do projeto
-<<<<<<< HEAD
-=======
 
-```
+```text
 src/
 │
 ├── controllers/     # Responsável por receber requisições e enviar respostas
@@ -56,13 +40,13 @@ src/
 ### Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/devRobertoBorges/api-listagem-nomes.git
 ```
 
 ### Acesse a pasta do projeto
 
 ```bash
-cd nome-do-projeto
+cd api-listagem-nomes
 ```
 
 ### Instale as dependências
@@ -87,7 +71,7 @@ npm run dev
 
 A API estará disponível em:
 
-```
+```text
 http://localhost:3333
 ```
 
@@ -124,7 +108,6 @@ Exemplo de requisição:
 
 ```json
 {
-  "id": 2,
   "nome": "Carlos"
 }
 ```
@@ -133,7 +116,7 @@ Exemplo de resposta:
 
 ```json
 {
-    "message": "successful"
+  "message": "successful"
 }
 ```
 
@@ -147,7 +130,7 @@ Busca um nome específico pelo identificador.
 
 Exemplo:
 
-```
+```text
 GET /nomes/1
 ```
 
@@ -170,7 +153,7 @@ Atualiza um registro existente.
 
 Exemplo:
 
-```
+```text
 PUT /nomes/1
 ```
 
@@ -192,7 +175,7 @@ Remove um registro pelo ID.
 
 Exemplo:
 
-```
+```text
 DELETE /nomes/1
 ```
 
@@ -200,34 +183,33 @@ DELETE /nomes/1
 
 # 🧠 Conceitos aplicados
 
-* Desenvolvimento de API REST
-* CRUD completo
-* Arquitetura em camadas
-* Separação de responsabilidades
-* Controllers
-* Services
-* Repositories
-* TypeScript
-* Variáveis de ambiente
-* Versionamento com Git
+- Desenvolvimento de API REST
+- CRUD completo
+- Arquitetura em camadas
+- Separação de responsabilidades
+- Controllers
+- Services
+- Repositories
+- TypeScript
+- Variáveis de ambiente
+- Versionamento com Git
 
 ---
 
 # 📌 Melhorias futuras
 
-* [ ] Implementar o MySQL
-* [ ] Implementar autenticação de usuários
-* [ ] Criar validações mais completas
-* [ ] Criar testes automatizados
-* [ ] Documentar API com Swagger
-* [ ] Deploy da aplicação
+- [ ] Implementar conexão completa com MySQL
+- [ ] Implementar autenticação de usuários
+- [ ] Criar validações mais completas
+- [ ] Criar testes automatizados
+- [ ] Documentar API com Swagger
+- [ ] Deploy da aplicação
 
 ---
 
 ## 👨‍💻 Autor
 
-**Seu nome**
+**Roberto Borges**
 
-GitHub:
+GitHub:  
 https://github.com/devRobertoBorges
->>>>>>> 4497d7db18376dd23b19aa0f0fe444d105505532
