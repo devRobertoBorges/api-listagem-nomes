@@ -202,7 +202,8 @@ DELETE /nomes/1
 - [ ] Implementar autenticação de usuários
 - [ ] Criar validações mais completas
 - [ ] Criar testes automatizados
-- [ ] Documentar API com Swagger
+- [ ] Criar o front-end da aplicação
+- [ ] Implementar TypeORM
 - [ ] Deploy da aplicação
 
 ---
