@@ -87,7 +87,7 @@ export const updateNomeService = async (id:number, nome:string) => {
     };
 
     //RETORNA O STATUS CODE DE SUCESSO
-    return await httpResponse.ok(data);
+    return await httpResponse.updated();
 }; 
 
 //PEGA A FUNCAO DE DELETAR DO REPOSITORIO

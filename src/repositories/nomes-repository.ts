@@ -4,6 +4,7 @@ import { tipagemNomes, tipagemNomesSql } from "../models/nomes-model";
 //IMPORTA A CONEXAO COM MYSQL
 import  { connection, testConnection }  from "../database/connection";
 
+import { ResultSetHeader } from "mysql2";
 
 //DATA BASE EM ARRAY PROVISORIO NA MEMORIA
 export const databaseNomes: tipagemNomes[] = [
@@ -77,26 +78,12 @@ export const createNomeSql = async (nome: tipagemNomes) => {
 };
 
 //EXPORTA A FUNCAO QUE ATUALIZA UM NOME, (RECE UM ID E UM NOME) E REPASSA UMA PROMISSE NO CONTRATO OU INDEFINIDO
-export const findAndModifyNome = async(id:number, nome: string): Promise<tipagemNomes | undefined> => {
-     
-    //PERCORRE O ARRAY E O PUXA O NOME PELO ID INFORMADO
-    const nomeIndex = databaseNomes.findIndex (nome => nome.id === id);
+export const findAndModifyNome = async(id:number, nome: string): Promise<ResultSetHeader> => {
+    const [result] = await connection.query<ResultSetHeader>(
+        "UPDATE nomes SET nome = ? WHERE id = ?", [nome,id]
+    );
 
-    //VERIFICA SE FOI ACHADO ALGO COM O ID INFORMADO
-    if (nomeIndex === -1){
-
-        //RETORNA INDEFINIDO QUANDO NÃO ACHA
-        return undefined;
-        
-        //SE NAO
-    }else{
-
-        //PEGA O NOME INFORMADO NA FUNCAO E SUBSTITUI O NOME INFORMADO
-        databaseNomes[nomeIndex].nome = nome;
-    };
-
-    //RETORNA O ITEM QUE FOI SUBSTITUIDO
-    return databaseNomes[nomeIndex];
+    return result;
 };
 
 

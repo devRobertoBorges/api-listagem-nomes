@@ -36,10 +36,19 @@ export const created = async (): Promise<httpResponse> => {
 //EXPORTA A RESPOSTA BAD REQUEST COM UMA MENSAGEM INFORMADA NA SERVICE
 export const badRequest = async(message: string): Promise<httpResponse> => {
     return {
-        statusCode:201,
+        statusCode:400,
         body: {
             message
         }
     };
 };
 
+//EXPORTA A RESPOSTA CREATED E RETORNA PARA O SERVICE O STATUS CODE E A MENSAGEM
+export const updated = async (): Promise<httpResponse> => {
+    return {
+        statusCode:200,
+        body: {
+            message: "successful"
+        }
+    };
+};
