@@ -8,14 +8,5 @@ const connection = mysql.createPool({
     port: Number(process.env.DB_PORT)
 });
 
-async function testConnection(){
-    try {
-        const conn = await connection.getConnection();
-        console.log("Conectado");
-        conn.release();
-    }catch(error) {
-        console.error("Erro ao conectar", error)
-    };
-};
 
-export { connection, testConnection };
+export { connection };
