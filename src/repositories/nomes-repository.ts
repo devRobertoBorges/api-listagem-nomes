@@ -2,7 +2,7 @@
 import { tipagemNomes, tipagemNomesSql } from "../models/nomes-model";
 
 //IMPORTA A CONEXAO COM MYSQL
-import { connection } from "../database/connection";
+import  connection  from "../database/connection";
 
 export const databaseNomes: tipagemNomes[] = [
     {
