@@ -2,54 +2,7 @@
 import { tipagemNomes, tipagemNomesSql } from "../models/nomes-model";
 
 //IMPORTA A CONEXAO COM MYSQL
-import  { connection, testConnection }  from "../database/connection";
-
-import { ResultSetHeader } from "mysql2";
-
-//DATA BASE EM ARRAY PROVISORIO NA MEMORIA
-export const databaseNomes: tipagemNomes[] = [
-    {
-        id: 1,
-        nome: "João"
-    },
-    {
-        id: 2,
-        nome: "Maria"
-    },
-    {
-        id: 3,
-        nome: "Pedro"
-    },
-    {
-        id: 4,
-        nome: "Ana"
-    },
-    {
-        id: 5,
-        nome: "Carlos"
-    },
-    {
-        id: 6,
-        nome: "Fernanda"
-    },
-    {
-        id: 7,
-        nome: "Lucas"
-    },
-    {
-        id: 8,
-        nome: "Juliana"
-    },
-    {
-        id: 9,
-        nome: "Gabriel"
-    },
-    {
-        id: 10,
-        nome: "Beatriz"
-    }
-];
-
+import  { connection }  from "../database/connection";
 
 //EXPORTA A FUNCAO QUE LISTA O TODOS OS NOMES DO SQL
 export const findAllNomesSql = async () => {
@@ -78,8 +31,8 @@ export const createNomeSql = async (nome: tipagemNomes) => {
 };
 
 //EXPORTA A FUNCAO QUE ATUALIZA UM NOME, (RECE UM ID E UM NOME) E REPASSA UMA PROMISSE NO CONTRATO OU INDEFINIDO
-export const findAndModifyNome = async(id:number, nome: string): Promise<ResultSetHeader> => {
-    const [result] = await connection.query<ResultSetHeader>(
+export const findAndModifyNome = async(id:number, nome: string) => {
+    const [result] = await connection.query(
         "UPDATE nomes SET nome = ? WHERE id = ?", [nome,id]
     );
 
@@ -89,19 +42,9 @@ export const findAndModifyNome = async(id:number, nome: string): Promise<ResultS
 
 //EXPORTA A FUNCAO QUE DELETA O NOME PELO ID
 export const deleteNomeById = async (id:number) => {
+    const [result] = await connection.query(
+        "DELETE FROM nomes WHERE id = ?", [id]
+    );
 
-    //ARMAZENA O INDEX PERCORRENDO O ARRAY, SE O ARRAY INFORMADO NA FUNCAO FOR IGUAL O ID DO ARRAY
-    const index = databaseNomes.findIndex (n => n.id === id);
-
-
-    //SE NAO ACHAR RETORNA FALSE
-    if (index === -1){
-        return false;
-
-    //SE NAO APAGA O NOME E RETORNA TRUE
-    }else {
-        databaseNomes.splice(index, 1);
-
-        return true;
-    };
+    return result;
 };
