@@ -2,7 +2,6 @@
 // IMPORTA AS FUNCOES DO REPOSITORIO
 import * as databaseNomes from "../repositories/nomes-repository";
 
-
 //IMPORTA AS RESPOSTA DO HELPER
 import * as httpResponse from "../utils/http-helper";
 

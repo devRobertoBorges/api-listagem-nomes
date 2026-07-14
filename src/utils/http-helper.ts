@@ -43,7 +43,7 @@ export const badRequest = async(message: string): Promise<httpResponse> => {
     };
 };
 
-//EXPORTA A RESPOSTA CREATED E RETORNA PARA O SERVICE O STATUS CODE E A MENSAGEM
+//EXPORTA A RESPOSTA DE ATUALIZAR E RETORNA PARA O SERVICE O STATUS CODE E A MENSAGEM
 export const updated = async (): Promise<httpResponse> => {
     return {
         statusCode:200,
