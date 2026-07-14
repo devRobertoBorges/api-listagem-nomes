@@ -18,4 +18,4 @@ async function testConnection(){
     };
 };
 
-export default testConnection;
+export { connection, testConnection };

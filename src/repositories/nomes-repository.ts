@@ -2,8 +2,10 @@
 import { tipagemNomes, tipagemNomesSql } from "../models/nomes-model";
 
 //IMPORTA A CONEXAO COM MYSQL
-import  connection  from "../database/connection";
+import  { connection, testConnection }  from "../database/connection";
 
+
+//DATA BASE EM ARRAY PROVISORIO NA MEMORIA
 export const databaseNomes: tipagemNomes[] = [
     {
         id: 1,
