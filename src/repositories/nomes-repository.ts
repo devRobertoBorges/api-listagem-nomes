@@ -1,8 +1,9 @@
 //IMPORTA O CONTRATO DO MODELS
-import { tipagemNomes } from "../models/nomes-model";
+import { tipagemNomes, tipagemNomesSql } from "../models/nomes-model";
 
+//IMPORTA A CONEXAO COM MYSQL
+import { connection } from "../database/connection";
 
-//ARMAZENA O BANCO DE DADOS COM O CONTRATO, EXIGINDO QUE OBRIGATORIAMENTE TENHA ID, NOME
 export const databaseNomes: tipagemNomes[] = [
     {
         id: 1,
@@ -46,9 +47,14 @@ export const databaseNomes: tipagemNomes[] = [
     }
 ];
 
+
 //EXPORTA A FUNCAO QUE ACESSA TODO O BANCO DE DADOS
-export const findAllNomes = async () => {
-    return databaseNomes;
+export const findAllNomesSql = async () => {
+    const [rows] = await connection.query<tipagemNomesSql[]>(
+        "SELECT * FROM nomes"
+    );
+
+    return rows;
 };
 
 //EXPORTA A FUNCAO QUE ACHA UM NOME PELO ID, ONDE RETORNA UMA PROMESSA QUE SEJA IGUAL O CONTRATO OU NADA

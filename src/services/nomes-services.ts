@@ -2,6 +2,7 @@
 // IMPORTA AS FUNCOES DO REPOSITORIO
 import * as databaseNomes from "../repositories/nomes-repository";
 
+
 //IMPORTA AS RESPOSTA DO HELPER
 import * as httpResponse from "../utils/http-helper";
 
@@ -11,7 +12,7 @@ import { tipagemNomes } from "../models/nomes-model";
 //PEGA DO REPOSITORIO A FUNCAO DE LISTAR TODOS OS NOMES E TRANSFORMA EM UM REPONSE DO HTTP
 export const getNomesService = async () => {
     //RECEBE OS DADOS DO REPOSITORIO
-    const dataNomes = await databaseNomes.findAllNomes();
+    const dataNomes = await databaseNomes.findAllNomesSql();
 
     //ARMAZENA A REPOSTA COM O CONTRATO DO HTTP
     let response = null;
