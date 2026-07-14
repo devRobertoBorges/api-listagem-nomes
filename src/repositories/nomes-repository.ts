@@ -50,7 +50,7 @@ export const databaseNomes: tipagemNomes[] = [
 ];
 
 
-//EXPORTA A FUNCAO QUE ACESSA TODO O BANCO DE DADOS
+//EXPORTA A FUNCAO QUE LISTA O TODOS OS NOMES DO SQL
 export const findAllNomesSql = async () => {
     const [rows] = await connection.query<tipagemNomesSql[]>(
         "SELECT * FROM nomes"
@@ -60,14 +60,20 @@ export const findAllNomesSql = async () => {
 };
 
 //EXPORTA A FUNCAO QUE ACHA UM NOME PELO ID, ONDE RETORNA UMA PROMESSA QUE SEJA IGUAL O CONTRATO OU NADA
-export const findNomesById = async (id: number): Promise <tipagemNomes | undefined> => {
-    return databaseNomes.find( nome => nome.id === id);
+export const findNomesByIdSql = async (id: number): Promise <tipagemNomes | undefined> => {
+    const [rows] = await connection.query<tipagemNomesSql[]>(
+        "SELECT * FROM nomes WHERE id = ?", [id]
+    );
+
+    return rows[0];
 };
 
 //EXPORTA A FUNCAO QUE CRIA UM NOME, (RECEBE UM OBJETO DO TIPO TIPAGEMNOMES) E REPASSA PARA O SERVICE
-export const createNome = async (nome: tipagemNomes) => {
-    //FUNCAO QUE USA O PUSH PARA IMPLEMENTAR NA LISTA
-    databaseNomes.push(nome);
+export const createNomeSql = async (nome: tipagemNomes) => {
+    const [result] = await connection.query(
+        "INSERT INTO nomes (nome) VALUES (?)",
+        [nome.nome]
+    );
 };
 
 //EXPORTA A FUNCAO QUE ATUALIZA UM NOME, (RECE UM ID E UM NOME) E REPASSA UMA PROMISSE NO CONTRATO OU INDEFINIDO

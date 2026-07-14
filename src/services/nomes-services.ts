@@ -34,7 +34,7 @@ export const getNomesService = async () => {
 export const getNomeServiceById = async (id: number) => {
 
     //ARMAZENA A FUNCAO DE PUXAR PELO ID, PASSA O ID RECEBIDO, ARMAZENA O QUE FOI ACHADO
-    const data = await databaseNomes.findNomesById(id);
+    const data = await databaseNomes.findNomesByIdSql(id);
 
     //VARIAVEL NULA DA REPOSTA
     let response = null;
@@ -56,17 +56,17 @@ export const createNomeService = async (nome: tipagemNomes) => {
     let response = null;
 
     //VERIFICA SE O OBJETO É VAZIO OU OS TIPOS ESTÃO ERRADOS
-    if(typeof nome.id === "number" && typeof nome.nome === "string" && nome.nome.trim() !== ""){
+    if(typeof nome.nome === "string" && nome.nome.trim() !== ""){
 
         //CHAMA A FUNCAO DO REPOSITORIO E PASSA O OBJETO RECEBIDO
-        await databaseNomes.createNome(nome);
+        await databaseNomes.createNomeSql(nome);
 
         //SE NAO TIVER VAZIO GUARDA A RESPOSTA DE OK NA VARIAVEL
         response = await httpResponse.created();
     }else {
 
         //SE NAO, GUARDA A REPOSTA NA VARIAVEL
-        response = await httpResponse.badRequest('O objeto deve conter um id (number) e um nome (string).');
+        response = await httpResponse.badRequest('O objeto deve conter um nome (string).');
     };
     
     //RETORNA A VARIAVEL RESPONSE
