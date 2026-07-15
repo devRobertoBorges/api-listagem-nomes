@@ -198,7 +198,7 @@ DELETE /nomes/1
 
 # 📌 Melhorias futuras
 
-- [ ] Implementar conexão completa com MySQL
+- [x] Implementar conexão completa com MySQL
 - [ ] Implementar autenticação de usuários
 - [ ] Criar validações mais completas
 - [ ] Criar testes automatizados
