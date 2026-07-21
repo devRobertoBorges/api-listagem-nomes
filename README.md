@@ -1,8 +1,8 @@
 # 📚 API Listagem de Nomes - Full Stack
 
-Aplicação Full Stack desenvolvida para realizar o gerenciamento de nomes, permitindo cadastrar, listar, atualizar e remover registros.
+Aplicação Full Stack desenvolvida para gerenciamento de nomes, permitindo cadastrar, listar, atualizar e remover registros.
 
-O projeto foi desenvolvido com foco em estudos e prática de desenvolvimento web utilizando **Node.js, Express, TypeScript, MySQL e React**, aplicando organização em camadas, separação de responsabilidades e boas práticas de desenvolvimento.
+O projeto foi desenvolvido com foco em estudo e prática de desenvolvimento web utilizando **Node.js, Express, TypeScript, MySQL e React**, aplicando organização em camadas, separação de responsabilidades e boas práticas de desenvolvimento.
 
 ---
 
@@ -28,6 +28,7 @@ O projeto foi desenvolvido com foco em estudos e prática de desenvolvimento web
 - Axios
 - Lucide React
 - Componentização
+- Hooks do React
 
 ---
 
@@ -42,16 +43,16 @@ api-listagem-nomes/
 │   ├── src/
 │   │
 │   ├── controllers/
-│   │       # Responsável por receber requisições e retornar respostas
+│   │       # Responsável pelo controle das requisições HTTP
 │   │
 │   ├── services/
-│   │       # Contém regras de negócio
+│   │       # Contém regras de negócio da aplicação
 │   │
 │   ├── repositories/
-│   │       # Comunicação com o banco de dados
+│   │       # Responsável pela comunicação com o banco MySQL
 │   │
 │   ├── models/
-│   │       # Tipagem e modelos da aplicação
+│   │       # Tipagens e modelos da aplicação
 │   │
 │   ├── utils/
 │   │       # Funções auxiliares
@@ -60,7 +61,7 @@ api-listagem-nomes/
 │   │       # Configuração do Express
 │   │
 │   ├── routes.ts
-│   │       # Rotas da aplicação
+│   │       # Definição das rotas
 │   │
 │   └── server.ts
 │           # Inicialização do servidor
@@ -73,16 +74,17 @@ api-listagem-nomes/
 │   ├── components/
 │   │       # Componentes reutilizáveis
 │   │
-│   ├── pages/
-│   │       # Páginas da aplicação
-│   │
 │   ├── services/
 │   │       # Comunicação com a API
 │   │
 │   ├── types/
 │   │       # Tipagens TypeScript
 │   │
+│   ├── App.tsx
+│   │       # Estrutura principal da aplicação
+│   │
 │   └── main.tsx
+│           # Inicialização do React
 │
 └── README.md
 ```
@@ -99,7 +101,7 @@ git clone https://github.com/devRobertoBorges/api-listagem-nomes.git
 
 ---
 
-# 🔙 Executando o Backend
+# 🔙 Backend
 
 Acesse a pasta:
 
@@ -124,13 +126,13 @@ DB_PASSWORD=sua_senha
 DB_DATABASE=api_listagem_nomes
 ```
 
-Execute:
+Execute o servidor:
 
 ```bash
 npm run dev
 ```
 
-API disponível em:
+API disponível:
 
 ```text
 http://localhost:3333
@@ -138,11 +140,9 @@ http://localhost:3333
 
 ---
 
-# 🎨 Executando o Frontend
+# 🎨 Frontend
 
 Em outro terminal:
-
-Acesse:
 
 ```bash
 cd frontend
@@ -160,7 +160,7 @@ Execute:
 npm run dev
 ```
 
-Aplicação disponível em:
+Aplicação disponível:
 
 ```text
 http://localhost:5173
@@ -172,35 +172,47 @@ http://localhost:5173
 
 ## ✅ Listagem de nomes
 
-Permite visualizar todos os registros cadastrados através da API.
+Exibe todos os registros cadastrados no banco de dados através da API.
 
 ---
 
-## ✅ Criar nomes
+## ✅ Cadastro de nomes
 
-Permite adicionar novos registros no banco de dados.
+O cadastro foi integrado à tela de gerenciamento.
+
+O usuário consegue adicionar novos nomes diretamente no painel de listagem, sem necessidade de abrir uma nova página.
 
 ---
 
 ## ✅ Atualização de nomes
 
-Possui edição diretamente no card do nome:
+Possui edição diretamente no card do registro.
 
-- Clique no botão editar;
-- Campo de texto aparece;
-- Pressione ENTER para salvar;
-- Clique fora para cancelar;
-- Atualização realizada via API.
+Fluxo:
+
+- Usuário seleciona editar;
+- Campo de edição aparece no próprio card;
+- Pressiona ENTER para salvar;
+- Clique fora cancela a edição;
+- Alteração é enviada para API.
 
 ---
 
 ## ✅ Exclusão de nomes
 
-Possui confirmação antes da exclusão:
+Possui confirmação antes da remoção.
 
-- Usuário seleciona o registro;
+Fluxo:
+
+- Usuário seleciona excluir;
 - Sistema solicita confirmação;
-- Registro é removido através da API.
+- Registro é removido do banco através da API.
+
+---
+
+## ✅ Feedback visual
+
+A aplicação possui mensagens de confirmação após ações realizadas, melhorando a experiência do usuário.
 
 ---
 
@@ -295,31 +307,37 @@ DELETE /nome/1
 - Services
 - Repositories
 - React Components
-- Comunicação entre Frontend e Backend
+- Comunicação Frontend e Backend
 - TypeScript
-- Hooks do React
+- Hooks
 - Axios
 - MySQL
 - Variáveis de ambiente
 - Git e GitHub
+- Interface responsiva com Tailwind CSS
 
 ---
 
 # 🔮 Melhorias futuras
 
 - [x] Implementar conexão com MySQL
+- [x] Criar Backend com Express e TypeScript
 - [x] Criar Frontend React
 - [x] Implementar CRUD completo
 - [x] Criar edição inline
 - [x] Criar confirmação de exclusão
 - [x] Criar feedback visual de ações
+- [x] Criar interface utilizando Tailwind CSS
+
+Próximas melhorias:
+
 - [ ] Implementar cadastro de usuários
 - [ ] Criar autenticação JWT
 - [ ] Criar validações avançadas
 - [ ] Criar testes automatizados
-- [ ] Implementar ORM (TypeORM/Prisma)
-- [ ] Deploy da aplicação
+- [ ] Implementar ORM (Prisma/TypeORM)
 - [ ] Criar documentação Swagger
+- [ ] Deploy da aplicação
 
 ---
 
