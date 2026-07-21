@@ -1,9 +1,13 @@
 import express from "express";
 import router from "./routes";
-
+import cors from "cors"
 
 function createApp(){
     const app = express();
+
+    app.use(cors({
+        origin: "http://localhost:5173"
+    }));
 
     app.use(express.json());
 
