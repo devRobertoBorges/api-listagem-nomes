@@ -313,7 +313,7 @@ DELETE /nome/1
 - [x] Criar edição inline
 - [x] Criar confirmação de exclusão
 - [x] Criar feedback visual de ações
-- [ ] Implementar cadastro de usuários
+- [ -] Implementar cadastro de usuários
 - [ ] Criar autenticação JWT
 - [ ] Criar validações avançadas
 - [ ] Criar testes automatizados
