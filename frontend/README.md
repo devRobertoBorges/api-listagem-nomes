@@ -1,75 +1,332 @@
-# React + TypeScript + Vite
+# 📚 API Listagem de Nomes - Full Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação Full Stack desenvolvida para realizar o gerenciamento de nomes, permitindo cadastrar, listar, atualizar e remover registros.
 
-Currently, two official plugins are available:
+O projeto foi desenvolvido com foco em estudos e prática de desenvolvimento web utilizando **Node.js, Express, TypeScript, MySQL e React**, aplicando organização em camadas, separação de responsabilidades e boas práticas de desenvolvimento.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+# 🚀 Tecnologias utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Backend
 
-## Expanding the ESLint configuration
+- Node.js
+- Express
+- TypeScript
+- MySQL
+- mysql2
+- CORS
+- dotenv
+- Git e GitHub
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Frontend
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Axios
+- Lucide React
+- Componentização
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 📂 Estrutura do projeto
 
+```text
+api-listagem-nomes/
+
+│
+├── backend/
+│
+│   ├── src/
+│   │
+│   ├── controllers/
+│   │       # Responsável por receber requisições e retornar respostas
+│   │
+│   ├── services/
+│   │       # Contém regras de negócio
+│   │
+│   ├── repositories/
+│   │       # Comunicação com o banco de dados
+│   │
+│   ├── models/
+│   │       # Tipagem e modelos da aplicação
+│   │
+│   ├── utils/
+│   │       # Funções auxiliares
+│   │
+│   ├── app.ts
+│   │       # Configuração do Express
+│   │
+│   ├── routes.ts
+│   │       # Rotas da aplicação
+│   │
+│   └── server.ts
+│           # Inicialização do servidor
+│
+│
+├── frontend/
+│
+│   ├── src/
+│   │
+│   ├── components/
+│   │       # Componentes reutilizáveis
+│   │
+│   ├── pages/
+│   │       # Páginas da aplicação
+│   │
+│   ├── services/
+│   │       # Comunicação com a API
+│   │
+│   ├── types/
+│   │       # Tipagens TypeScript
+│   │
+│   └── main.tsx
+│
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+# ⚙️ Como executar o projeto
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Clone o repositório
+
+```bash
+git clone https://github.com/devRobertoBorges/api-listagem-nomes.git
+```
+
+---
+
+# 🔙 Executando o Backend
+
+Acesse a pasta:
+
+```bash
+cd backend
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Configure o arquivo `.env`:
+
+```env
+PORT=3333
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=sua_senha
+DB_DATABASE=api_listagem_nomes
+```
+
+Execute:
+
+```bash
+npm run dev
+```
+
+API disponível em:
+
+```text
+http://localhost:3333
+```
+
+---
+
+# 🎨 Executando o Frontend
+
+Em outro terminal:
+
+Acesse:
+
+```bash
+cd frontend
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Execute:
+
+```bash
+npm run dev
+```
+
+Aplicação disponível em:
+
+```text
+http://localhost:5173
+```
+
+---
+
+# 📌 Funcionalidades
+
+## ✅ Listagem de nomes
+
+Permite visualizar todos os registros cadastrados através da API.
+
+---
+
+## ✅ Criar nomes
+
+Permite adicionar novos registros no banco de dados.
+
+---
+
+## ✅ Atualização de nomes
+
+Possui edição diretamente no card do nome:
+
+- Clique no botão editar;
+- Campo de texto aparece;
+- Pressione ENTER para salvar;
+- Clique fora para cancelar;
+- Atualização realizada via API.
+
+---
+
+## ✅ Exclusão de nomes
+
+Possui confirmação antes da exclusão:
+
+- Usuário seleciona o registro;
+- Sistema solicita confirmação;
+- Registro é removido através da API.
+
+---
+
+# 📌 Endpoints da API
+
+## Listar nomes
 
 ```
+GET /nome
+```
+
+Resposta:
+
+```json
+[
+  {
+    "id": 1,
+    "nome": "Roberto"
+  }
+]
+```
+
+---
+
+## Criar nome
+
+```
+POST /nome
+```
+
+Body:
+
+```json
+{
+  "nome": "Carlos"
+}
+```
+
+---
+
+## Buscar nome por ID
+
+```
+GET /nome/:id
+```
+
+Exemplo:
+
+```
+GET /nome/1
+```
+
+---
+
+## Atualizar nome
+
+```
+PATCH /nome/:id
+```
+
+Body:
+
+```json
+{
+  "nome": "Roberto Silva"
+}
+```
+
+---
+
+## Deletar nome
+
+```
+DELETE /nome/:id
+```
+
+Exemplo:
+
+```
+DELETE /nome/1
+```
+
+---
+
+# 🧠 Conceitos aplicados
+
+- API REST
+- CRUD completo
+- Arquitetura em camadas
+- Separação de responsabilidades
+- Controllers
+- Services
+- Repositories
+- React Components
+- Comunicação entre Frontend e Backend
+- TypeScript
+- Hooks do React
+- Axios
+- MySQL
+- Variáveis de ambiente
+- Git e GitHub
+
+---
+
+# 🔮 Melhorias futuras
+
+- [x] Implementar conexão com MySQL
+- [x] Criar Frontend React
+- [x] Implementar CRUD completo
+- [x] Criar edição inline
+- [x] Criar confirmação de exclusão
+- [x] Criar feedback visual de ações
+- [ ] Implementar cadastro de usuários
+- [ ] Criar autenticação JWT
+- [ ] Criar validações avançadas
+- [ ] Criar testes automatizados
+- [ ] Implementar ORM (TypeORM/Prisma)
+- [ ] Deploy da aplicação
+- [ ] Criar documentação Swagger
+
+---
+
+# 👨‍💻 Autor
+
+**Roberto Borges**
+
+GitHub:
+
+https://github.com/devRobertoBorges
