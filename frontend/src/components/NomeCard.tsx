@@ -137,7 +137,7 @@ function NomeCard({
 		<div
 			ref={campoRef}
 			className="
-				bg-[#e5e6eb]
+				bg-[#f1f1f3]
 				border
 				border-[#d2d4dc]
 				rounded-xl

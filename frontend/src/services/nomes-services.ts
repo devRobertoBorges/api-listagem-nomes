@@ -35,3 +35,13 @@ export async function atualizarNome(
 	return response.data;
 
 }
+
+export async function criarNome(nome: string) {
+
+	const response = await api.post("/nome", {
+		nome
+	});
+
+	return response.data;
+
+}

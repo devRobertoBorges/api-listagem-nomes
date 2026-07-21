@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
-
+import NovoNome from "../components/NovoNome";
 import type { Nome } from "../types/Nome";
 
 import {
 	buscarNomes,
+	criarNome,
 	deletarNome,
 	atualizarNome
 } from "../services/nomes-services";
@@ -19,7 +20,7 @@ function Home() {
 	const [mostrarLista, setMostrarLista] = useState(false);
 	const [nomeParaExcluir, setNomeParaExcluir] = useState<number | null>(null);
 	const [mensagem, setMensagem] = useState(false);
-
+	const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
 
 	async function carregarNomes() {
@@ -52,22 +53,31 @@ function Home() {
 
 
 
-	async function removerNome(id: number) {
+async function removerNome(id: number) {
 
-		await deletarNome(id);
-
-
-		setNomes((nomesAtuais) =>
-			nomesAtuais.filter(
-				(nome) => nome.id !== id
-			)
-		);
+	await deletarNome(id);
 
 
-		setNomeParaExcluir(null);
+	setNomes((nomesAtuais) =>
+		nomesAtuais.filter(
+			(nome) => nome.id !== id
+		)
+	);
 
-	}
 
+	setNomeParaExcluir(null);
+
+
+	setMensagem(true);
+
+
+	setTimeout(() => {
+
+		setMensagem(false);
+
+	}, 2500);
+
+}
 
 
 	async function editarNome(
@@ -108,7 +118,25 @@ function Home() {
 
 	}
 
+	async function adicionarNome(nome: string) {
 
+		await criarNome(nome);
+
+		await carregarNomes();
+
+		setMostrarFormulario(false);
+
+
+		setMensagem(true);
+
+
+		setTimeout(() => {
+
+			setMensagem(false);
+
+		}, 2500);
+
+	}
 
 
 	return (
@@ -215,11 +243,15 @@ function Home() {
 					Gerenciamento de Nomes
 
 				</h1>
+				
+				{mostrarLista && (
 
+					<NovoNome
+						onSalvar={adicionarNome}
+						onCancelar={() => setMostrarFormulario(false)}
+					/>
 
-
-
-
+				)}
 
 				{!mostrarLista && (
 
@@ -242,9 +274,14 @@ function Home() {
 
 				)}
 
+				{mostrarFormulario && (
 
+					<NovoNome
+						onSalvar={adicionarNome}
+						onCancelar={() => setMostrarFormulario(false)}
+					/>
 
-
+				)}
 
 
 

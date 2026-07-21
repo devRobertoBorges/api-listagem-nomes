@@ -20,7 +20,7 @@ function Button({ children, onClick }: ButtonProps) {
         active:scale-95
       "
       style={{
-        backgroundColor: "#c0c2ce"
+        backgroundColor: "#e5e7f1"
       }}
     >
       {children}
