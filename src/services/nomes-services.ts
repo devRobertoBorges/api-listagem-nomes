@@ -10,101 +10,130 @@ import { tipagemNomes } from "../models/nomes-model";
 
 //PEGA DO REPOSITORIO A FUNCAO DE LISTAR TODOS OS NOMES E TRANSFORMA EM UM REPONSE DO HTTP
 export const getNomesService = async () => {
-    //RECEBE OS DADOS DO REPOSITORIO
-    const dataNomes = await databaseNomes.findAllNomesSql();
+    try {
+        //RECEBE OS DADOS DO REPOSITORIO
+        const dataNomes = await databaseNomes.findAllNomesSql();
 
-    //ARMAZENA A REPOSTA COM O CONTRATO DO HTTP
-    let response = null;
-    if (dataNomes){
-        response = await httpResponse.ok(dataNomes);
-    }else {
-        response = {
-            statusCode: 404,
-            body: null,
-            message: "not found"
-        }
+        //ARMAZENA A REPOSTA COM O CONTRATO DO HTTP
+        let response = null;
+        if (dataNomes){
+            response = await httpResponse.ok(dataNomes);
+        }else {
+            response = {
+                statusCode: 404,
+                body: null,
+                message: "not found"
+            }
+        };
+        
+        //RETORNA O CONTRATO PARA O CONTROLLER
+        return response;
+    } catch (erro) {
+        console.error(erro);
+        return await httpResponse.serverError();
     };
-    
-    //RETORNA O CONTRATO PARA O CONTROLLER
-    return response;
 };
 
 //PEGA DO REPOSITORIO A FUNCAO DE ACHAR UM NOME PELO ID, E RECEBE UM ID PARA PUXAR O NOME
 export const getNomeServiceById = async (id: number) => {
 
-    //ARMAZENA A FUNCAO DE PUXAR PELO ID, PASSA O ID RECEBIDO, ARMAZENA O QUE FOI ACHADO
-    const data = await databaseNomes.findNomesByIdSql(id);
+    try {
+        //ARMAZENA A FUNCAO DE PUXAR PELO ID, PASSA O ID RECEBIDO, ARMAZENA O QUE FOI ACHADO
+        const data = await databaseNomes.findNomesByIdSql(id);
 
-    //VARIAVEL NULA DA REPOSTA
-    let response = null;
+        //VARIAVEL NULA DA REPOSTA
+        let response = null;
 
-    //VERIFICACAO SE EXISTE ALGO RECEBIDO PELA FUNCAO DO REPOSITORIO
-    if (data){
-        response = await httpResponse.ok(data);
-    }else{
-        response = await httpResponse.notFound();
+        //VERIFICACAO SE EXISTE ALGO RECEBIDO PELA FUNCAO DO REPOSITORIO
+        if (data){
+            response = await httpResponse.ok(data);
+        }else{
+            response = await httpResponse.notFound();
+        };
+
+        //RETORNA O CONTRATO PARA O CONTROLLER
+        return response;
+    }catch (erro){
+        console.log(erro);
+        return await httpResponse.serverError();
     };
 
-    //RETORNA O CONTRATO PARA O CONTROLLER
-    return response;
 };
 
 //PEGA A FUNCAO DO REPOSITORIO DE CRIAR NOMES, E RECEBE UM OBJETO DO TIPO TIPAGEM NOMES 
 export const createNomeService = async (nome: tipagemNomes) => {
-    //CRIA UMA VARIAVEL QUE GUARDARA A RESPOSTA
-    let response = null;
+    try {
+        //CRIA UMA VARIAVEL QUE GUARDARA A RESPOSTA
+        let response = null;
 
-    //VERIFICA SE O OBJETO É VAZIO OU OS TIPOS ESTÃO ERRADOS
-    if(typeof nome.nome === "string" && nome.nome.trim() !== ""){
+        //VERIFICA SE O OBJETO É VAZIO OU OS TIPOS ESTÃO ERRADOS
+        if(typeof nome.nome === "string" && nome.nome.trim() !== ""){
 
-        //CHAMA A FUNCAO DO REPOSITORIO E PASSA O OBJETO RECEBIDO
-        await databaseNomes.createNomeSql(nome);
+            //CHAMA A FUNCAO DO REPOSITORIO E PASSA O OBJETO RECEBIDO
+            await databaseNomes.createNomeSql(nome);
 
-        //SE NAO TIVER VAZIO GUARDA A RESPOSTA DE OK NA VARIAVEL
-        response = await httpResponse.created();
-    }else {
+            //SE NAO TIVER VAZIO GUARDA A RESPOSTA DE OK NA VARIAVEL
+            response = await httpResponse.created();
+        }else {
 
-        //SE NAO, GUARDA A REPOSTA NA VARIAVEL
-        response = await httpResponse.badRequest('O objeto deve conter um nome (string).');
+            //SE NAO, GUARDA A REPOSTA NA VARIAVEL
+            response = await httpResponse.badRequest('O objeto deve conter um nome (string).');
+        };
+        
+        //RETORNA A VARIAVEL RESPONSE
+        return response;
+    } catch(erro){
+        console.log(erro);
+        return await httpResponse.serverError();
     };
-    
-    //RETORNA A VARIAVEL RESPONSE
-    return response;
 };
 
 //PEGA A FUNCAO DE ATUALIZAR O NOME DO REPOSITORIO, E RECEBE UM ID E UM NOME
 export const updateNomeService = async (id:number, nome:string) => {
+    try {
+        //VERIFICA SE NOME É UMA ENTRADA VÁLIDA ANTES DE IR PARA O BANCO
+        if (typeof nome !== "string" || nome.trim() === "") {
+            return await httpResponse.badRequest('Informe um nome válido')
+        };
 
-    //ARMAZENA O QUE CHEGA DA FUNCAO DO REPOSITORIO
-    const data = await databaseNomes.findAndModifyNome(id, nome);
+        //ARMAZENA O QUE CHEGA DA FUNCAO DO REPOSITORIO
+        const data = await databaseNomes.findAndModifyNome(id, nome);
 
-    //VERIFICA SE CHEGOU DADO NA VARIAVEL
-    if (!data){
+        //VERIFICA SE CHEGOU DADO NA VARIAVEL
+        if (!data){
 
-        //RETORNA O STATUS CODE DE ERRO
-        return await httpResponse.badRequest('Informe um nome');
+            //RETORNA O STATUS CODE DE ERRO
+            return await httpResponse.badRequest('id not found');
+        };
+
+        //RETORNA O STATUS CODE DE SUCESSO
+        return await httpResponse.updated();
+    } catch(erro){
+        console.log(erro);
+        return await httpResponse.serverError();
     };
-
-    //RETORNA O STATUS CODE DE SUCESSO
-    return await httpResponse.updated();
 }; 
 
 //PEGA A FUNCAO DE DELETAR DO REPOSITORIO
 export const deleteNomeService = async (id:number) => {
+    try { 
+        //PUXA O RETORNO DA FUNCAO NO REPOSITORIO E ARMAZENA COMO BOOLEAN
+        const deleted = await databaseNomes.deleteNomeById(id);
 
-    //PUXA O RETORNO DA FUNCAO NO REPOSITORIO E ARMAZENA COMO BOOLEAN
-    const deleted = await databaseNomes.deleteNomeById(id);
+        //SE FOR FALSE
+        if(!deleted) {
 
-    //SE FOR FALSE
-    if(!deleted) {
+            //RETORNA O BAD REQUEST DO HTTP HELPER
+            return await httpResponse.badRequest('id not found');
 
-        //RETORNA O BAD REQUEST DO HTTP HELPER
-        return await httpResponse.badRequest('id not found');
+            //SE NAO
+        }else {
 
-        //SE NAO
-    }else {
-
-        //RETORNA O OK DO HTTP HELPER
-        return await httpResponse.ok({message: 'deleted'});
+            //RETORNA O OK DO HTTP HELPER
+            return await httpResponse.ok({message: 'deleted'});
+        };
+    } catch(erro){
+        console.log(erro);
+        return await httpResponse.serverError();
     };
-};  
+};

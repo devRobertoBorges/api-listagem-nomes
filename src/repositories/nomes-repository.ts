@@ -1,6 +1,8 @@
 //IMPORTA O CONTRATO DO MODELS
 import { tipagemNomes, tipagemNomesSql } from "../models/nomes-model";
 
+import { ResultSetHeader } from "mysql2";
+
 //IMPORTA A CONEXAO COM MYSQL
 import  { connection }  from "../database/connection";
 
@@ -31,20 +33,20 @@ export const createNomeSql = async (nome: tipagemNomes) => {
 };
 
 //EXPORTA A FUNCAO QUE ATUALIZA UM NOME, (RECE UM ID E UM NOME) E REPASSA UMA PROMISSE NO CONTRATO OU INDEFINIDO
-export const findAndModifyNome = async(id:number, nome: string) => {
-    const [result] = await connection.query(
+export const findAndModifyNome = async(id:number, nome: string): Promise<boolean> => {
+    const [result] = await connection.query<ResultSetHeader>(
         "UPDATE nomes SET nome = ? WHERE id = ?", [nome,id]
     );
 
-    return result;
+    return result.affectedRows > 0;
 };
 
 
 //EXPORTA A FUNCAO QUE DELETA O NOME PELO ID
-export const deleteNomeById = async (id:number) => {
-    const [result] = await connection.query(
+export const deleteNomeById = async (id:number): Promise<boolean> => {
+    const [result] = await connection.query<ResultSetHeader>(
         "DELETE FROM nomes WHERE id = ?", [id]
     );
 
-    return result;
+    return result.affectedRows > 0;
 };

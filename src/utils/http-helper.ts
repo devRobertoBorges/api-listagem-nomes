@@ -52,3 +52,12 @@ export const updated = async (): Promise<httpResponse> => {
         }
     };
 };
+
+export const  serverError = async (): Promise<httpResponse> => {
+    return {
+        statusCode: 500,
+        body: {
+            message: "serverError"
+        }
+    };
+};
