@@ -54,7 +54,7 @@ export const getNomeServiceById = async (id: number) => {
         //RETORNA O CONTRATO PARA O CONTROLLER
         return response;
     }catch (erro){
-        console.log(erro);
+        console.error(erro);
         return await httpResponse.serverError();
     };
 
@@ -83,7 +83,7 @@ export const createNomeService = async (nome: tipagemNomes) => {
         //RETORNA A VARIAVEL RESPONSE
         return response;
     } catch(erro){
-        console.log(erro);
+        console.error(erro);
         return await httpResponse.serverError();
     };
 };
@@ -109,7 +109,7 @@ export const updateNomeService = async (id:number, nome:string) => {
         //RETORNA O STATUS CODE DE SUCESSO
         return await httpResponse.updated();
     } catch(erro){
-        console.log(erro);
+        console.error(erro);
         return await httpResponse.serverError();
     };
 }; 
@@ -133,7 +133,7 @@ export const deleteNomeService = async (id:number) => {
             return await httpResponse.ok({message: 'deleted'});
         };
     } catch(erro){
-        console.log(erro);
+        console.error(erro);
         return await httpResponse.serverError();
     };
 };

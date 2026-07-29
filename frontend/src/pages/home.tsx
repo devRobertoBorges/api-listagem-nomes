@@ -20,7 +20,7 @@ function Home() {
 	const [mostrarLista, setMostrarLista] = useState(false);
 	const [nomeParaExcluir, setNomeParaExcluir] = useState<number | null>(null);
 	const [mensagem, setMensagem] = useState(false);
-	const [mostrarFormulario, setMostrarFormulario] = useState(false);
+	const [, setMostrarFormulario] = useState(false);
 
 
 	async function carregarNomes() {
@@ -273,16 +273,6 @@ async function removerNome(id: number) {
 					</div>
 
 				)}
-
-				{mostrarFormulario && (
-
-					<NovoNome
-						onSalvar={adicionarNome}
-						onCancelar={() => setMostrarFormulario(false)}
-					/>
-
-				)}
-
 
 
 				{mostrarLista && (
