@@ -137,6 +137,7 @@ function NomeCard({
 		<div
 			ref={campoRef}
 			className="
+				animate-[surgir_0.4s_ease-out]
 				bg-[#f1f1f3]
 				border
 				border-[#d2d4dc]

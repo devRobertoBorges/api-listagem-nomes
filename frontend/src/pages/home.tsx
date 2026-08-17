@@ -21,6 +21,7 @@ function Home() {
 	const [nomeParaExcluir, setNomeParaExcluir] = useState<number | null>(null);
 	const [mensagem, setMensagem] = useState(false);
 	const [, setMostrarFormulario] = useState(false);
+	const [nomeRemovendo, setNomeRemovendo] = useState<number | null>(null);
 
 
 	async function carregarNomes() {
@@ -55,28 +56,28 @@ function Home() {
 
 async function removerNome(id: number) {
 
-	await deletarNome(id);
+    setNomeRemovendo(id);
 
+    setTimeout(async () => {
 
-	setNomes((nomesAtuais) =>
-		nomesAtuais.filter(
-			(nome) => nome.id !== id
-		)
-	);
+        await deletarNome(id);
 
+        setNomes((nomesAtuais) =>
+            nomesAtuais.filter(
+                (nome) => nome.id !== id
+            )
+        );
 
-	setNomeParaExcluir(null);
+        setNomeParaExcluir(null);
+        setNomeRemovendo(null);
 
+        setMensagem(true);
 
-	setMensagem(true);
+        setTimeout(() => {
+            setMensagem(false);
+        }, 2500);
 
-
-	setTimeout(() => {
-
-		setMensagem(false);
-
-	}, 2500);
-
+    }, 400);
 }
 
 
@@ -280,9 +281,16 @@ async function removerNome(id: number) {
 					<div className="space-y-3">
 
 
-						{nomes.map((nome) => (
+						{[...nomes].reverse().map((nome) => (
 
-							<div key={nome.id}>
+								<div
+									key={nome.id}
+									className={
+										nomeRemovendo === nome.id
+											? "animate-[sumir_0.4s_ease-in_forwards]"
+											: ""
+									}
+								>
 
 
 								<NomeCard
